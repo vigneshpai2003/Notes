@@ -1,0 +1,24 @@
+<h1 class="title">Mechanics</h1>
+<h3 class="author">Vignesh Pai</h3>
+<div class="table-of-contents"></div>
+
+<section>
+    <h1>Lagrangian Mechanics</h1>
+    Let $M$ be the configuration space of a system, and let $L$ be its Lagrangian
+    then the action $S$ is defined in a time interval as:
+    \begin{align}
+        S(x) := \int_{t_1}^{t_2} L(x, \dot{x}, t) \, dt
+    \end{align}
+    where $x: [t_1, t_2] \to M$ represents the time evolution of the configuration of the system.
+    <br><br>
+    $M$ is often restrained by holonomic constraints, these are constraints of the form $f(x, t) = 0$.
+    <section>
+        <h1>Principle of Stationary Action</h1>
+        If the particle's is perturbed by a small amount $\epsilon \beta(t)$:
+        \begin{align}
+            \delta S &:= \dv{S(x_0 + \epsilon \beta)}{\epsilon} \Big|_{\epsilon=0} \\
+            &= \int_{t_1}^{t_2} \pdv{L}{x} \beta + \pdv{L}{\dot{x}} \dot{\beta} \, dt \\
+            &= \int_{t_1}^{t_2} \left(\pdv{L}{x} - \dv{}{t}\pdv{L}{\dot{x}}\right) \beta \, dt \\
+        \end{align}
+    </section>
+</section>

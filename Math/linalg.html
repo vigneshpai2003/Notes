@@ -1,0 +1,159 @@
+<h1 class="title">Linear Algebra</h1>
+<h3 class="author">Vignesh Pai</h3>
+
+<div class="table-of-contents"></div>
+
+<section>
+    <h1>Gaussian Elimination</h1>
+    <div>
+        Gaussian Elimination is used to solve the system of equations $Ax = b$.
+        It proceeds by eliminating variables one by one and then using back substitution.
+        It is based on the concept that row exchanges and adding multiples of other rows
+        does not alter the solution to the system.
+    </div>
+
+    <section>
+        <h1>LU Decomposition</h1>
+        <div>
+            <div class="theorem definition n-definition">
+                The elementary matrix $E_{ij}(l)$ is the operation that subtracts $l$ times the $j$<sup>th</sup>
+                row from the $i$<sup>th</sup> row. It is $I$ with the $i,j$ coordinate $-l$.
+                <br><br>
+                Note: $E_{ij}^{-1}(l) = E_{ij}(-l)$
+            </div>
+
+            While multiplication of $E$ is in general not commutative, when applied in Gaussian Elimination
+            it leads to a very simple matrix.
+
+            Assume that the upper triangular matrix obtained in Gaussian Elimination is:
+            \begin{align}
+                U = E_n \dots E_2E_1 A
+            \end{align}
+            then, we can write $A$ as
+            \begin{align}
+                A &= E_1^{-1}E_2^{-1} \dots E_n^{-1} U \\
+                A &= LU
+            \end{align}
+            where $L$ can be shown to be lower triangular with diagonals $1$. Further, it can be shown that
+            the non diagonal elements are simply the corresponding elements of the elementary matrices.
+            <br>
+            In other words $L_{ij}$ is simply the multiplier used to eliminate $A_{ij}$.  
+        </div>
+        <div class="theorem remark">
+            LDU decomposition refers to extracting the diagonals elements of $U$ (such that they become $1$)
+            into a diagonal matrix $D$. 
+        </div>
+    </section>
+
+    <section>
+        <h1>Permutations</h1>
+        During Gaussian Elimination, 0s may be encountered in the pivot position
+        even if the matrix is non singular.
+        To avoid this, the rows are suitably permuted using a permutation matrix $P$
+        such that $PA = LU$ ($b$ becomes $Pb$).
+        <div>
+            <div class="theorem definition n-definition">
+                The permutation matrix $P$ is an operation that permutes the rows or columns
+                of any matrix. It is a permutation of the rows of $I$.
+                <br>
+                $P_{ij}$ is the operation that swaps the $i$<sup>th</sup> and $j$<sup>th</sup>
+                rows or columns of a matrix. It is $I$ with rows $i$ and $j$ interchanged.
+                <br><br>
+                To exchange rows of a square matrix A, compute $PA$.<br> To exchange columns,
+                compute $AP$.
+            </div>
+            
+            <div class="theorem remark">
+                For any permutation matrix $P$, $P^T = P^{-1}$.
+                In particular, $P_{ij}$ is symmetric and $P_{ij}=P_{ij}^T=P_{ij}^{-1}$
+            </div>
+
+            While doing elimination, we find $U$ by a series of elementary and permutation operations.
+            \begin{align}
+                U = (E_n P_k E_{n-1} \dots P_i E_j \dots E_1) A \label{u-permuted}
+            \end{align}
+            Unlike the previous case we might not get a lower triangular $L$ if we invert this in this form.
+            
+            <div class="theorem lemma">
+                $E' = P_{ij} E_{xy} P_{ij}$ is also a lower triangular elementary matrix if both $ij$ are not the same as $xy$
+                (fortunately this is always the case in Gaussian Elimination).
+                Using $P = P^{-1}$,
+                \begin{align}
+                    P_{ij} E_{xy} = E' P_{ij}
+                \end{align}
+                where $E'$ is just $E_{xy}$ with its $i$ and $j$ rows exchanged upto the diagonal.
+                In other words, the diagonal is retained while the lower triangular rows are exchanged.
+            </div>
+
+            Using the above lemma, we can rearrange \eqref{u-permuted} as
+            \begin{align}
+                U &= (E'_n E'_{n-1} \dots E'_2 E'_1) (P_k \dots P_1) A \\
+                &= (E'_n E'_{n-1} \dots E'_2 E'_1) P A \\
+            \end{align}
+            Inverting this gives a lower triangular $L$. In a practical algorithm, every time a permutation
+            is encountered, $U$ and $P$ are permuted as usual. $L$ is permuted in the lower triangular region
+            to preserve its diagonals (this can be done as per the above lemma).
+        </div>
+    </section>
+
+    <section class="x">
+        <h1>Gauss Jordan Method</h1>
+        <div>
+            This is a method for calculating inverses, each column of the inverse is
+            computed parallely. Let $I_i$ be the columns of the identity matrix
+            and let $x_i$ be the columns of the inverse.
+            \begin{align}
+                Ax_i &= I_i \\
+                A[x_1, x_2, \dots, x_n] &= [I_1, I_2, \dots, I_n] \\
+            \end{align}
+            Normally, we do elimination on $[A, b]$ and use backsubstitution.
+            Here, we do elimination on $[A, I_1, I_2, ..., I_n]$ and reduce $A$ to $U$
+            as usual. If we do backsubstitution, we have to do it separately for every $x_i$.
+            Instead we do elimination in the opposite direction and convert $U$ to a diagonal matrix
+            and eventually $I$.<br>Now, $x_i$ is simply the rest of the columns and we have found the inverse.
+        </div>
+    </section>
+
+    <section class="x">
+        <h1>Pivoting</h1>
+        <div>
+            In practical algorithms, round off error becomes significant for too large
+            or too small pivots. While it is theoretically sufficient to pivot only when a 
+            0 is found, in reality the pivoting is done at every step to find the best pivot.
+            This is known as partial pivoting.
+            <br><br>
+            In complete pivoting, even the columns are permuted.
+            However, practically partial pivoting is sufficient in general.
+        </div>
+    </section>
+</section>
+
+<section>
+    <h1>Vector Spaces</h1>
+    A vector is an ordered array of numbers of length $n$,
+    the set of all such vectors is called the vector space $\mathbb{R}^n$.
+    <br><br>
+    In general, if a set of objects is a vector space then for any $x, y, z$ in the set
+    and constants $c, c_1, c_2$:
+    <ol>
+        <li>$x + y = y + x$</li>
+        <li>$x + (y + z) = (x + y) + z$</li>
+        <li>There exists a unique $0$ such that $x + 0 = 0$ for all $x$.</li>
+        <li>There exists a unique $-x$ for every $x$ such that $x + (-x) = 0$.</li>
+        <li>$1x = x$</li>
+        <li>$(c_1 c_2)x = c_1 (c_2 x)$</li>
+        <li>$c(x + y) = cx + cy$</li>
+        <li>$(c_1 + c_2)x = c_1 x + c_2 x$</li>
+    </ol>
+    Further, the set must be closed under scalar addition and scalar multiplication.
+    <br><br>
+    A subspace is a space that is a subset of the vector space.
+    The zero vector belongs to every subspace, since $0$ times any vector in a subspace must lie in that subspace.
+    <br><br>
+    The column space of a matrix $A$, $C(A)$, is the space containing all linear combinations of columns of $A$.
+    <br><br>    
+    The system $Ax=b$ is solvable iff $b \in C(A)$.
+    <br><br>
+    The null space of a matrix $A$, $N(A)$, is the space containing all solutions to $Ax=0$.
+    If the matrix is invertible, $N(A) = \{0\}$ (which can be derived by multiplying $Ax=0$ by $A^{-1}$).
+</section>

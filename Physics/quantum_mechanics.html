@@ -1,0 +1,369 @@
+<h1 class="title">Quantum Mechanics</h1>
+<h3 class="author">Vignesh Pai</h3>
+<div class="table-of-contents"></div>
+
+<section>
+    <h1>Formalism</h1>
+
+    <section>
+        <h1>Hilbert space</h1>
+        <div>
+            A complex valued function $f$ is square integrable in a domain $D$ if $\int_D |f(x)|^2 \,dx$ exists.
+            The Hilbert space consists of square integrable functions on $\mathbb{R}$.
+            Wave functions live in the Hilbert space.
+            <br><br>
+            The inner product of two functions $f, g$ is defined as
+            \begin{align}
+                \langle f | g \rangle &= \int_D f^*(x) g(x) \,dx \\
+                \langle f | g \rangle &= \langle g | f \rangle^*
+            \end{align}
+            The norm is defined as:
+            \begin{align}
+                \|f\| = \sqrt{\langle f | f \rangle}
+            \end{align}
+            Schwarz inequality
+            \begin{align}
+                |\langle f | g \rangle| \leq \sqrt{\|f\|^2 \|g\|^2}
+            \end{align}
+        </div>
+    </section>
+    
+    <section>
+        <h1>Observables</h1>
+        <div>
+            The expectation of an observable $Q$ with corresponding linear operator $\hat{Q}$
+            is given by
+            \begin{align}
+                \langle Q \rangle = \langle f | \hat{Q} f \rangle
+            \end{align}
+            because $Q$ refers to a physical property, it is real:
+            \begin{align}
+                \langle Q \rangle &= \langle Q \rangle^* \\
+                \langle f | \hat{Q} f \rangle &= \langle \hat{Q} f | f \rangle
+            \end{align}
+            Such $\hat{Q}$ are called Hermitian. It can also be proved that
+            \begin{align}
+                \langle f | \hat{Q} g \rangle &= \langle \hat{Q} f | g \rangle
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Determinate States</h1>
+        <div>
+            For some values of $\Psi$ there may be complete determinacy in $Q$. This means
+            \begin{align}
+                q &= \langle Q \rangle \\
+                \langle (Q - q)^2 \rangle &= 0 \\
+                \langle \Psi | (Q - q)^2 \Psi \rangle &= 0 \\
+                \langle (Q - q) \Psi | (Q - q) \Psi \rangle &= 0 \\
+                (Q - q) \Psi &= 0 \\
+            \end{align}
+            This is an eigenvalue problem, with the eigenvector as $\Psi$.
+            The spectrum is all the collection of all eigenvalues.
+            Eigenvectors are said to be degenerate if they share the eigenvalue.
+        </div>
+    </section>
+
+    <div>
+        The wave function $\Psi(x, t)$ of a particle can be written as a 2 dimensional inverse Fourier Transform
+        on $\hat{\Psi}(\kappa, \omega)$:
+        \begin{align}
+            \Psi(x, t) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \hat{\Psi}(\kappa, \omega) e^{i\kappa x - i \omega t} \, d\kappa \, d\omega \label{fft}
+        \end{align}
+        Its derivatives are
+        \begin{align}
+            \pdv{\Psi(x, t)}{t} &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} - i\omega \hat{\Psi}(\kappa, \omega) e^{i\kappa x - i \omega t} \, d\kappa \, d\omega \\
+            \pdv[2]{\Psi(x, t)}{x} &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} - \kappa^2 \hat{\Psi}(\kappa, \omega) e^{i\kappa x - i \omega t} \, d\kappa \, d\omega    
+        \end{align}
+        with the classical wave convention on the signs of $\kappa$ and $\omega$.
+        The energy of a particle is given by:
+        \begin{align}
+            E = \frac{p^2}{2m} + V
+        \end{align}
+        For a photon:
+        \begin{align}
+            E &= h \nu= \hbar \omega \\
+        \end{align}
+        Using de Broglie equation:
+        \begin{align}
+            p &= \frac{h}{\lambda} = \hbar \kappa \\
+        \end{align}
+        Combining the above results:
+        \begin{align}
+            \hbar \omega &= \frac{\hbar^2}{2m} \kappa^2 + V
+        \end{align}
+        Multiplying both sides by $\hat{\Psi} e^{i\kappa x - i \omega t}$, and integrating,
+        we get the expressions for the above derivatives.
+        \begin{align}
+            i\hbar\pdv{\Psi}{t} &= - \frac{\hbar^2}{2m} \pdv[2]{\Psi}{x} + V \Psi \label{main}
+        \end{align}
+        This is the Schrodinger equation.
+    </div>
+</section>
+
+<section>
+    <h1>The Wave Function</h1>
+
+    <section>
+        <h1>The Schrodinger Equation</h1>
+        <div>
+            Born's statistical interpretation gives that the
+            probability of finding a particle between two points is the integral of $\Psi*\Psi = |\Psi|^2$
+            between them. Therefore $\Psi$ is normalized such that
+            \begin{align}
+                \int_{-\infty}^{\infty} |\Psi|^2 \,dx &= 1 \\
+            \end{align}
+        </div>
+        <div>
+            <h3>Useful properties of $\Psi$</h3>
+
+            $\Psi$ and its derivatives tend to $0$ at $\pm \infty$.
+            This gives the formula for integration by parts as
+            \begin{align}
+                \int_{-\infty}^{\infty} \Psi_1 \pdv{\Psi_2}{x} \, dx = -\int_{-\infty}^{\infty} \pdv{\Psi_1}{x} \Psi_2 \, dx
+            \end{align}
+
+            Some useful expansions are
+            \begin{align}
+                -i \hbar \pdv{\Psi^*}{t} &= - \frac{\hbar^2}{2m} \pdv[2]{\Psi^*}{x} + V \Psi^* \\
+                \pdv{|\Psi|^2}{t} &= \frac{i\hbar}{2m} \pdv{x}\left(\Psi^*\pdv{\Psi}{x} - \pdv{\Psi^*}{x}\Psi\right) \\
+            \end{align}
+
+            Adding a phase factor to a solution does not alter the probability distribution
+            and is equivalent to adding a constant to the potential.
+
+            \begin{align}
+                \Psi' &= \Psi e^{\frac{-iV_0t}{\hbar}}\\
+                V' &= V + V_0
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Probability</h1>
+        <div>
+            \begin{align}
+                \langle f(x) \rangle &= \int_{-\infty}^{\infty} f(x)|\Psi|^2 \,dx
+            \end{align}
+
+            Let $\Psi_1$ and $\Psi_2$ be two wave functions satisfying the same potential
+            \begin{align}
+                &\dv{t} \int_{-\infty}^{\infty} \Psi_1^* \Psi_2 \,dx\\ 
+                &= \frac{1}{i\hbar}\int_{-\infty}^{\infty} i \hbar \pdv{\Psi_1^*}{t} \Psi_2 + \Psi_1^* i \hbar \pdv{\Psi_2}{t}\,dx \\
+                &= \frac{1}{i\hbar}\int_{-\infty}^{\infty} -\frac{\hbar^2}{2m} \left(\Psi_1^* \pdv[2]{\Psi_2}{x} - \pdv[2]{\Psi_1^*}{x} \Psi_2 \right) \,dx \\
+                &= 0 \\
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Probability Current</h1>
+        <div>
+            The probability of finding a particle in region $a &lt x &lt b$ over the course of time,
+            can be imagined to have 'probability' flowing in at $x = a$ and flowing out at $x = b$ at rate $J$.
+
+            \begin{align}
+                \dv{P_{ab}}{t} &= \dv{t} \int_a^b |\Psi|^2 dx = J(a, t) - J(b, t) \\
+                J(x, t) &= \pdv{|\Psi|^2}{t} \\
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Momentum</h1>
+        <div>
+            \begin{align}
+                \dv{\langle x \rangle}{t} &= \int_{-\infty}^{\infty} x \pdv{|\Psi|^2}{t} \,dx \\
+                &= \frac{i\hbar}{2m}\int_{-\infty}^{\infty} x \pdv{x}\left(\Psi^* \pdv{\Psi}{x} - \pdv{\Psi^*}{x}\Psi\right)\,dx \\
+                &= - \frac{i\hbar}{2m}\int_{-\infty}^{\infty} \Psi^* \pdv{\Psi}{x} - \pdv{\Psi^*}{x}\Psi \,dx \\
+                &= - \frac{i\hbar}{m}\int_{-\infty}^{\infty} \Psi^* \pdv{\Psi}{x} \,dx \\
+                \langle p \rangle &:= m \dv{\langle x \rangle}{t} = \int_{-\infty}^{\infty} \Psi^* \left(- i \hbar \pdv{x}\right) \Psi \,dx
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Ehrenfest's Theorem</h1>
+        <div>
+            \begin{align}
+                \dv{\langle p \rangle}{t} &= - i \hbar \int_{-\infty}^{\infty} \pdv{\Psi^*}{t} \pdv{\Psi}{x} + \Psi^* \pdv[2]{\Psi}{t}{x}\,dx \\
+                &= - i \hbar \int_{-\infty}^{\infty} \pdv{\Psi^*}{t} \pdv{\Psi}{x} - \pdv{\Psi^*}{x} \pdv{\Psi}{t}\,dx \\
+                &= \int_{-\infty}^{\infty} V \left(\Psi^* \pdv{\Psi}{x} + \Psi \pdv{\Psi^*}{x}\right)\,dx \\
+                &= \int_{-\infty}^{\infty} - \pdv{V}{x} |\Psi|^2 \,dx \\
+                &= \left\langle - \pdv{V}{x} \right\rangle
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>The Uncertainty Principle</h1>
+        <div>
+            \begin{align}
+                \sigma_{f(x, p)} &= \langle f^2 \rangle - \langle f \rangle^2\\
+                \sigma_x \sigma_p &\geq \frac{\hbar}{2}
+            \end{align}
+        </div>
+    </section>
+
+    <section class="x">
+        <h1>Some Wave Functions</h1>
+        <div>
+            <ul>
+                <li>
+                    <h3>$\Psi(x, t) = Ae^{-\lambda |x|}$</h3>
+                    <div>
+                        Potential:
+                        \begin{align*}
+                            V = - \lambda \delta(x) + \frac{\hbar^2}{2m} \lambda^2
+                        \end{align*}
+
+                        Normalisation:
+                        \begin{align*}
+                            A = \sqrt{\lambda}
+                        \end{align*}
+
+                        Expectations:
+                        \begin{align*}
+                            \langle x \rangle &= \frac{1}{2\lambda}\\
+                            \langle x^2 \rangle &= \frac{1}{2\lambda^2}\\
+                            \langle p \rangle &= 0\\
+                            \langle p^2 \rangle &= \hbar^2 \lambda^2\\
+                        \end{align*}
+                    </div>
+                </li>
+                <li>
+                    <h3>$\Psi(x, t) = A e^{-\lambda x^2}$</h3>
+                    <div>
+                        Potential:
+                        \begin{align*}
+                            V = \frac{\hbar^2 \lambda}{m} (2\lambda x^2 - 1)
+                        \end{align*}
+
+                        Normalisation:
+                        \begin{align*}
+                            A = \sqrt[4]{\frac{2\lambda}{\pi}}
+                        \end{align*}
+
+                        Expectations:
+                        \begin{align*}
+                            \langle x \rangle &= 0 \\
+                            \langle x^2 \rangle &= \frac{1}{4\lambda} \\
+                            \langle p \rangle &= 0 \\
+                            \langle p^2 \rangle &= \lambda \hbar^2
+                        \end{align*}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h1>Probability Distributions in Classical Systems</h1>
+        <div>
+
+            Let a particle of mass $m$ be in a potential well $V(x)$ between $x=a$ and $x=b$,
+            with total energy $E$. Let $P$ be the probability distribution.
+
+            The velocity of the particle is:
+            \begin{align*}
+                v(x) &= \sqrt{\frac{2(E - V)}{m}}\\
+                p(x) &= m v(x)
+            \end{align*}
+
+            The time taken to move between the endpoints is:
+            \begin{align*}
+                T = \int \,dt = \int_a^b \frac{1}{v(x)}\,dx
+            \end{align*}
+
+            \begin{align*}
+                P(x)dx &= \frac{dt}{T} = \frac{dx}{|v(x)|T}\\
+                P(p)dp &= \frac{dt}{T} = \frac{dp}{\left|\dv{p}{t}\right|T}=\frac{dp}{\left|\dv{V}{x} \left(x^{-1}(p)\right)\right| T}\\
+            \end{align*}
+
+            Simple Harmonic Oscillator:
+            \begin{align*}
+                V(x) &= \frac{1}{2}kx^2 \\
+                T &= \pi \sqrt{\frac{m}{k}} \\
+                P(x) &= \frac{1}{\pi\sqrt{\frac{2E}{k} - x^2}} \\
+                P(p) &= \frac{1}{\pi\sqrt{2mE - p^2}} \\
+                \langle x \rangle &= \langle p \rangle = 0 \\
+                \langle x^2 \rangle &= \frac{E}{k} \\
+                \langle p^2 \rangle &= mE \\
+            \end{align*}
+        </div>
+    </section>
+
+    <section>
+        <h1>Unstable Particles</h1>
+        <div>
+            The total probability of finding a decaying particle must decrease with time,
+            the only way this is possible is if potential has an imaginary component.
+            Let $V_0$ be the true potential, then $V=V_0-i\Gamma$ gives an exponentially
+            decreasing total probability.
+
+            \begin{align*}
+                P(t) &= \int_{\infty}^{\infty} \Psi^* \Psi \,dx \\
+                \dv{P}{t} &= \frac{1}{i\hbar} \int_{\infty}^{\infty} i\hbar \pdv{\Psi^*}{t} \Psi + \Psi^* i \hbar \pdv{\Psi}{t} \,dx \\
+                &= -\frac{2\Gamma}{\hbar} P \\
+                P &= e^{-\frac{2\Gamma t}{\hbar}} \\
+            \end{align*}
+
+            Then the lifetime $\tau = \frac{\hbar}{2\Gamma}$ or $\Gamma=\frac{\hbar}{2\tau}$.
+            This new imaginary potential is negligible for significant lifetimes.
+        </div>
+    </section>
+</section>
+
+<section>
+    <h1>Time Independent Schrodinger Equation</h1>
+    <div>
+        In this special case, $V$ is only a function of position and the partial differential equation
+        becomes separable.
+        \begin{align}
+            \Psi(x, t) = \psi(x) \varphi(t) \\
+            \pdv{\Psi(x, t)}{t} = \psi(x) \dv{\varphi(t)}{t} \\
+            \pdv[2]{\Psi(x, t)}{x} = \dv[2]{\psi(x)}{x} \varphi(t) \\
+        \end{align}
+        Substituting into \eqref{main}
+        \begin{align}
+            i \psi \dv{\varphi}{t} = - \frac{\hbar^2}{2m} \dv[2]{\psi} \varphi + V \psi \varphi\\
+            i \frac{1}{\varphi} \dv{\varphi}{t} = - \frac{\hbar^2}{2m} \frac{1}{\psi} \dv[2]{\psi} + V\\
+        \end{align}
+        Note that the LHS is time dependent while RHS is position dependent. Hence, the equation must equal a constant $E$.
+        The PDE has reduced to two ODEs.
+        \begin{align}
+            \dv{\varphi}{t} = - \frac{iE}{\hbar} \varphi \\
+            -\frac{\hbar^2}{2m}\dv[2]{\psi}{x} + V \psi = E \psi \label{t-ind-main}\\
+        \end{align}
+        
+        <div class="theorem remark">
+            $E$ must be real and $>\min{V(x)}$ for solutions in Hilbert space.
+            <br>
+            Further, the above differential equation does not contain imaginary coefficients.
+            Therefore, if $\psi$ is a solution, so is $\psi^*$ and we need only look at real solutions.
+        </div>
+        
+        The second equation is the time independent Schrodinger equation.
+        The first is a simple differential equation with solution $\varphi = e^{-\frac{iE}{\hbar}}$.
+        Note that $\varphi$ does not influence the probability distribution and the probability
+        distribution is constant in time (stationary state).
+        <br><br>
+        The second is contracted to the form $\hat{H}\psi = E \psi$ where $\hat{H}$ is the Hamiltonian operator.
+        Because this is an eigenvalue problem on $\hat{H}$, the solution leads to the same energy $E$ for all observations.
+        Each value of $E_n$ yields a different value of $\psi_n$, so there are infinite solutions.
+        <br><br>
+        Every solution of the time dependent Schrodinger equation with $V$ independent of $t$,
+        can be written as a linear combination of $\psi_n \varphi_n$:
+        \begin{align}
+            \Psi = \sum_{n=0}^{\infty} c_n \psi_n e^{-\frac{iE_n}{\hbar}t}
+        \end{align}
+        
+        <div class="theorem remark">
+            $|c_n|^2$ is the probability that a measurement of energy gives $E_n$.
+            \begin{align}
+                \langle H \rangle = \sum_{n=0}^{\infty} |c_n|^2 E_n
+            \end{align}
+        </div>
+    </div>
+</section>

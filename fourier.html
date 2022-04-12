@@ -1,0 +1,70 @@
+<h1 class="title">Fourier Analysis</h1>
+<h3 class="author">Vignesh Pai</h3>
+<div class="table-of-contents"></div>
+
+<section>
+    <h1>Fourier Series</h1>
+    <div>
+        The inner product of two functions $f, g$ in the Hilbert space is defined as:
+        \begin{align}
+            \langle f, g \rangle = \int_a^b{ f \bar{g} \, dx}
+        \end{align}
+        where $\bar{g}$ is the complex conjugate. The norm is defined as:
+        \begin{align}
+            \|f\|^2 = \langle f, f \rangle
+        \end{align}
+        Let $f$ be a complex valued function defined between reals $a$ and $b$.
+        Then $f$ may be written as:
+        \begin{align}
+            \omega_k(x) &= e^{i \frac{2\pi k}{b-a} x} \\
+            f(x) &= \sum_{k=-\infty}^{\infty}{C_k \omega_k(x)} \\
+            C_k &= \frac{\langle f, \omega_k(x)\rangle}{\|\omega_k(x)\|^2} = \frac{1}{b-a} \int_a^b{f(x) \omega_k(-x) \, dx}
+        \end{align}
+    </div>
+</section>
+
+<section>
+    <h1>Fourier Transform</h1>
+    <div>
+        Let $f$ be a complex valued function defined on the reals. Then $f$ may be written as
+        \begin{align}
+            f(x) = \int_{-\infty}^{\infty} \frac{1}{2\pi} \left(\int_{-\infty}^{\infty} f(\xi) e^{-i\omega \xi}\, d\xi\right) e^{i\omega x} \, d\omega
+        \end{align}
+        The Fourier Transform is defined as
+        \begin{align}
+            \hat{f}(\omega) = \mathcal{F}(f) = \int_{-\infty}^{\infty} f(x) e^{-i\omega x}\, dx \\
+            f(x) = \mathcal{F}^{-1}(\hat{f}) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat{f}(x) e^{i\omega x}\, dx \\
+        \end{align}
+        It is a linear operation. Some properties of the transformation are:
+        \begin{align}
+            \mathcal{F}\left(\dv{f}{x}\right) = i \omega \mathcal{F}(f)
+        \end{align}
+        Parseval's Theorem:
+        \begin{align}
+            \|\hat{f}\|^2 = 2\pi \|f\|^2
+        \end{align}
+    </div>
+</section>
+
+<section>
+    <h1>Discrete Fourier Transform</h1>
+    <div>
+        Let $f$ be a complex valued function with samples ($f_0$, $f_1$, ..., $f_{N-1}$)
+        at points ($0$, $1$, $2$, ...$N-1$). Then the fundamental frequency is $\omega_0 = \frac{2 \pi}{N}$.
+        Then the value of the component along the $k \omega_0$ 'direction' is given by
+        \begin{align}
+            \hat{f}_k = \sum_{j=0}^{N-1} f_j e^{-i (k \omega_0) j} \\
+            f_j = \frac{1}{N} \sum_{k=0}^{N-1} \hat{f_k} e^{i (k \omega_0) j} \\
+        \end{align}
+        Note that we can write this as a matrix equation: $\hat{f} = M f$.
+        Where the DFT matrix $M_{jk} = e^{-i\omega_0jk}$, $0 \leq j, k \leq N-1$.
+    </div>
+
+    <section>
+        <h1>Fast Fourier Transform</h1>
+        <div>
+            The naive DFT algorithm is $O(n^2)$ while the FFT is a smarter way to compute
+            the DFT using block matrices and recursion which is $O(n \log{n})$.
+        </div>
+    </section>
+</section>

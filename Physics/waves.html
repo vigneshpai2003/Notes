@@ -1,0 +1,700 @@
+<h1 class="title">Waves</h1>
+<h3 class="author">Vignesh Pai</h3>
+<div class="table-of-contents"></div>
+
+<section>
+    <h1>Simple Harmonic Oscillator</h1>
+    <section>
+        <h1>Derivation</h1>
+        Oscillations arise when a particle is close to a stable equilibrium.
+        For a particle in a potential $V$, equilibrium is when the force
+        $F = -\dv{V}{x} = 0$. The equilibrium is stable if this corresponds to 
+        a minima in potential energy ($\dv[2]{V}{x} > 0$).
+        
+        <div class="theorem remark">
+            Note that $V(x)=x^4$ has a stable equilibrium at $x=0$ as can be
+            seen from its graph. However, $\dv[2]{V}{x} = 0$. Such functions are
+            examples of oscillations but we do not consider them as they are rare.
+            <br><br>
+            There are even more wierd cases like $V(x)=e^{-\frac{1}{x^2}}$.
+        </div>
+
+        Near equilibrium $x_0$, the potential $V$ (assuming it has a Taylor expansion) can be written as
+        \begin{align}
+            V(x) &= V(x_0) + V'(x_0) (x-x_0) + \frac{1}{2} V''(x_0) (x-x_0)^2 + O((x-x_0)^3) \\
+            &= \frac{1}{2} V''(x_0) (x-x_0)^2 + \frac{1}{6} V'''(x_0) (x-x_0)^3 + O((x-x_0)^4) \\
+        \end{align}
+        We have offset $V$ such that $V(x_0) = 0$ for convenience. For sufficiently small $x - x_0$,
+        we can ignore the higher order terms.
+        \begin{align}
+            | V'''(x_0) (x-x_0) | &\ll |3 V''(x_0)| \\
+            V(x) &\approx \frac{1}{2} k x^2
+        \end{align}
+        This is under the assumption that the higher order terms are not especially large.
+        <br><br>
+        The force can now be written as (assuming it is conservative and independent of velocity):
+        \begin{align}
+            F(x) &= -\dv{V}{x} = - k x \\
+            \dv[2]{x}{t} &= - \frac{k}{m} x \\
+            \dv[2]{x}{t} &= - \omega^2 x \label{shm} \\
+        \end{align}
+        This is the equation of SHM.
+    </section>
+    
+    <section>
+        <h1>Solutions</h1>
+        \eqref{shm} is second order linear differential equation. 
+        <br><br>
+        Some important properties of the equation are:
+        <ul>
+            <li>The equation is linear, if $p(t), q(t)$ are solutions, so are $ap(t) + bq(t)$ for any real constants $a, b$.</li>
+            <li>The solutions have properties of vectors, therefore the set of all solutions can be interpreted as a vector space.</li>
+            <li>Solutions are uniquely and completely determined by the initial conditions $x_0, v_0$</li>
+            <li>The degree of freedom of the solution space is 2 ($x_0, v_0$).</li>
+        </ul>
+        Since the solution space is 2 dimensional, if we find two solutions that are not scales of each other (linearly independent),
+        any solution for any initial condition can be expressed as a linear combination of these solutions.
+
+        <div class="theorem remark">
+            In case the degree of freedom argument is not convincing, we can prove that if we have found linearly independent solutions $p(t), q(t)$,
+            the solution to any pair of initial conditions can be expressed as a linear combination of these.
+            <br><br>
+            Suppose we are given arbritrary initial conditions $x_0, v_0$, then:
+            \begin{align}
+                x_0 &= a p(0) + b q(0) \\
+                v_0 &= a p'(0) + b q'(0) \\
+            \end{align}
+            This system of equations do not have a unique solution for $a, b$ iff the determinant is zero.
+            \begin{align}
+                p(0) q'(0) - q(0) p'(0) = 0 \\
+            \end{align}
+            We will now show that the above determinant can never be 0.
+            Note that if $p(0) = 0$, then $p'(0) \neq 0$ since we are looking for nonzero solutions.
+            <br><br>
+            We can form three cases:
+            <ul>
+                <li>
+                    If $p(0) = q(0) = 0$, then that means that $\frac{q'(0)}{p'(0)} p$ and $q$ both satisfy the same initial condition
+                    $x_0 = 0, v_0 = q'(0)$ and therefore $q(t) = \frac{q'(0)}{p'(0)} p(t)$ which contradicts the linear independence.        
+                </li>
+                <li>
+                    If exactly one of $p(0), q(0)$ is 0, suppose $p(0)=0$, then $p'(0) \neq 0$ and the determinant becomes non zero.
+                </li>
+                <li>
+                    We are left with the case where both are $p(0), q(0)$ are non zero, if the determinant is zero then the functions $\frac{q(0)}{p(0)} p(t), q(t)$
+                    correspond to the same initial conditions and must be equal. Again we have a contradiction
+                    regarding the linear independence.
+                </li>
+            </ul>
+        </div>
+
+        Note that $\sin{\omega t}$ and $\cos{\omega t}$ are linearly independent solutions to the differential equation.
+        Therefore, any solution must be of the form:
+        \begin{align}
+            x(t) &= A \cos{\omega t} + B \sin{\omega t} \\
+            &=  x_0 \cos{\omega t} + \frac{v_0}{\omega} \sin{\omega t} \\
+        \end{align}
+        Effectively we have used $\sin{\omega t}$ and $\cos{\omega t}$ as the basis vectors for the solution space.
+
+        <div class="theorem remark">
+            We have not invoked time independence of the differential equation in the derivation.
+            Even if $\omega$ is a function of time, all postulates hold. However, the basis functions will be different.
+        </div>
+    </section>
+
+    <section>
+        <h1>Complex Solutions</h1>
+        The equation \eqref{shm} can also be solved in the complex domain.
+        None of the previous arguments change. $e^{\pm i\omega t}$ can be the basis
+        solutions, these are easier to work with because of the simple calculus of these functions.
+        <br><br>
+        Even though we have expanded the domain, the solutions in $\mathbb{R}$ are still
+        solutions in $\mathbb{C}$ and we can indeed verify that the new basis vectors can be
+        written in terms of the old basis vectors using Euler's formula:
+        \begin{align}
+            e^{\pm i\omega t} = \cos{\omega t} \pm i \sin{\omega t}
+        \end{align}
+    </section>
+</section>
+
+<section class="x">
+    <h1>Exponential Solutions</h1>
+    <section>
+        <h1>Motivation for Exponential Solutions</h1>
+        <div>
+            Due to time translational symmetry, we explore solutions of the form
+            \begin{align}
+                z(t+a) = h(a) z(t) \label{hdef}
+            \end{align}
+            First we need to show that such a $h$ can exists.
+            If it does, it is trivial to show that $z$ must be exponential:
+            \begin{align}
+                \pdv{z(t+a)}{a} &= \pdv{h(a)}{a} z(t) \\
+                z'(t+a) &= h'(a) z(t) \\
+                z'(t) &= h'(0) z(t) \\
+                z(t) &\propto e^{h'(0)t}                   
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Existence of $h$</h1>
+        <div>
+            Let $x_k$ be the basis solutions, by linearity,
+            \begin{align}
+                z(t) &= \sum_{j = 1}^{n}{c_j x_j(t)} \\
+                z(t+a) &= \sum_{j = 1}^{n}{c_j h(a) x_j(t)} \label{zta1} \\
+                z(t+a) &= \sum_{j = 1}^{n}{c_j x_j(t+a)} \\
+            \end{align}
+            <div class=" theorem remark">
+                In general: $x_j(t+a) \neq h(a) x_j(t)$. We do not make the claim 
+                that <i>all</i> solutions are of the form given in \eqref{hdef}.
+            </div>
+            We can further expand each $x_j(t+a)$:
+            \begin{align}
+                x_j(t+a) &= \sum_{k = 1}^{n}{R_{jk} x_k(t)}
+            \end{align}
+            Substituting back we get:
+            \begin{align}
+                z(t+a) &= \sum_{j = 1}^{n}{c_j \sum_{k = 1}^{n}{R_{jk} x_k(t)}} \\
+                &= \sum_{k = 1}^{n}{\left(\sum_{j=1}^n c_j R_{jk}\right) x_k(t)} \\
+                &= \sum_{j = 1}^{n}{\left(\sum_{k=1}^n c_k R_{kj}\right) x_j(t)} \label{zta2}\\
+            \end{align}
+            Comparing \eqref{zta1} and \eqref{zta2}, we get that:
+            \begin{align}
+                \sum_{k=1}^n c_k R_{kj} = c_j h(a)
+            \end{align}
+            In linear algebra terms:
+            \begin{align}
+                R^T \vec{c} = h(a)\vec{c}
+            \end{align}
+            This is now an eigenvalue problem, the eigenvalues are $h(a)$ and there will be $n$ of them (though they may be repeated and complex).
+        </div>
+    </section>
+
+    <section>
+        <h1>Another method of deriving exponential solutions</h1>
+        <div>
+            Using $t=0$ in \eqref{hdef}:
+            \begin{align}
+                h(a) &= \frac{z(a)}{z(0)} \\
+                z(0)z(t + a) &= z(t)z(a) \\
+                z(t) &= \frac{z^N\left(\frac{t}{N}\right)}{z^{N-1}(0)} \\
+                &= \lim_{n \to \infty}{\frac{\left(z(0) + z'(0) \frac{t}{N}\right)^N}{z^{N-1}(0)}} \\
+                &= z(0) \lim_{n \to \infty}{\left(1 + \frac{z'(0)}{z(0)} \frac{t}{N}\right)^N} \\
+                &= z(0) e^{\frac{z'(0)}{z(0)}t}
+            \end{align}
+        </div>
+    </section>
+</section>
+
+<section>
+    <h1>Damped Harmonic Oscillators</h1>
+    
+    <section class="subsection n-subsection">
+        <h1>Derivation</h1>
+        <div>
+            Damped Harmonic Oscillators arise when there are frictional forces
+            which depend on velocity.
+
+            \begin{align}
+                F(x) = - kx - m \Gamma \dv{x}{t} \\
+                \dv[2]{x}{t} + \Gamma \dv{x}{t} + \omega^2 x = 0 \label{dhm}
+            \end{align}
+
+            All properties such as linearity of SHM directly carry over to this equation as well.
+            All we need to find are the basis functions and we are done.
+        </div>
+    </section>
+
+    <section>
+        <h1>Solutions</h1>
+        In the case of SHM, we found that regardless of the value of $\omega$,
+        we could construct basis vectors of the form $\cos{\omega t}$ and $\sin{\omega t}$.
+        While we can still find basis solutions in $\mathbb{R}$ for a particular $\omega$ and $\Gamma$,
+        the basis vectors will change between exponential and sinosoidal functions to avoid imaginary numbers.
+        <br><br>
+        It becomes very convenient now to solve in $\mathbb{C}$ and use exponential functions only.
+        Assuming solutions of form $e^{\alpha t}$:
+        \begin{align}
+            &(\alpha^2 + \Gamma \alpha + \omega^2) e^{\alpha t} = 0 \\
+            \alpha &= -\frac{\Gamma}{2} \pm \frac{\sqrt{\Gamma^2 - 4\omega^2}}{2} \\
+        \end{align}
+        Three cases arise:
+        <ul>
+            <li>
+                Overdamping: $\Gamma > 2 \omega$
+                <div>
+                \begin{align}
+                    x = A_+ e^{\alpha_+t} + A_- e^{\alpha_-t}
+                \end{align}
+                where $\alpha_\pm &lt 0$.
+                </div>
+            </li>
+            <li>
+                Underdamping: $\Gamma &lt 2 \omega$
+                \begin{align}
+                    \alpha_\pm &= -\frac{\Gamma}{2} \pm i \omega' \\
+                    x &= e^{-\frac{\Gamma}{2} t} (A \cos{\omega't} + B \sin{\omega't})
+                \end{align}
+            </li>
+            <li>
+                Critical damping: $\Gamma = 2 \omega$
+                <br>
+                This a special case because there is only one exponential basis vector.
+                There is still another basis vector, however it is not exponential.
+                The solution can be derived by taking the behaviour of the above solutions as $\Gamma \to 2 \omega$.
+                \begin{align}
+                    \alpha &= -\frac{\Gamma}{2} \\
+                    x &= (A + Bt) e^{-\frac{\Gamma}{2} t}
+                \end{align}
+            </li>
+        </ul>
+        <div class="theorem remark">
+            If we solved purely in $\mathbb{R}$, we would have got 3 different types of basis solutions
+            instead of one general exponential solution.
+        </div>
+    </section>
+
+    <section>
+        <h1>Properties</h1>
+        The damped oscillator does not conserve energy because of the frictional force.
+        The approximate energy stored in the oscillator for underdamping.
+        \begin{align}
+            E(t) &\propto A(t)^2 \\
+            E(t) &\approx E_0 e^{-\Gamma t} \\
+        \end{align}
+        The relaxation time is the time required for the amplitude to decay to $e^{-1}$ times
+        its initial value.
+        \begin{align}
+            \tau = \frac{2}{\Gamma}
+        \end{align}
+        The Quality factor (Q-factor) is the phase needed for an oscillator to decay to $e^{-1}$ times its energy:
+        \begin{align}
+            Q = \frac{\omega'}{\Gamma}
+        \end{align}
+        $\omega \approx \omega'$ for small damping.
+    </section>
+
+    <section class="subsection n-subsection">
+        <h1>Forced Oscillations</h1>
+        <div>
+            Forced oscillations arise when a force is being applied on a Harmonic system
+            that is itself oscillating (perhaps the source of the force is another Harmonic system).
+            <br><br>
+            
+            Forced oscillations give a non homogeneous differential equation:
+            \begin{align}
+                \dv[2]{x}{t} + \Gamma \dv{x}{t} + \omega^2 x = \frac{F_0}{m} \cos{\omega_d t}
+            \end{align}
+            This is the same as taking the real part of the solution to
+            \begin{align}
+                \dv[2]{z}{t} + \Gamma \dv{z}{t} + \omega^2 z = \frac{F_0}{m} e^{-i\omega_d t}
+            \end{align}
+
+            This equation does not obey the laws of linearity, however if we find a solution to this,
+            we can add the general solution to it to obtain another valid solution.
+            
+            <div class="theorem remark">
+                However the general solution eventually dies out to 0 due to damping and is transient.
+                Hence, the steady state solution is much more significant.
+            </div>
+            
+            Assuming the steady state solution to be of the form $A e^{-i\omega_d t}$, we get:
+            \begin{align}
+                (- \omega_d^2 - i \omega_d \Gamma + \omega^2) &A e^{-i\omega_d t} = \frac{F_0}{m} e^{-i \omega_d t} \\
+                A &= \frac{F_0}{m(\omega^2 - \omega_d^2 - i \omega_d \Gamma)} \\
+                |A| &= \frac{F_0}{m\sqrt{(\omega^2 - \omega_d^2)^2 + \omega_d^2 \Gamma^2}} \\
+            \end{align}
+
+            The solution can be written as:
+            \begin{align}
+                x(t) = |A| \cos{(\omega_d t + \delta)} \\
+            \end{align}
+
+            Where $\delta$ is the phase given by
+            \begin{align}
+                \delta = \tan^{-1}{\frac{\omega_d \Gamma}{\omega^2 - \omega_d^2}}
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Resonance</h1>
+        The solution can also be written as
+        \begin{align}
+            x &= A_{elastic} \cos{\omega_d t} + A_{absorptive} \sin{\omega_d t} \\
+            v &= \omega_d(- A_{elastic} \sin{\omega_d t} + A_{absorptive} \cos{\omega_d t}) \\
+        \end{align}
+        
+        The power is given by
+        \begin{align}
+            P &= F \cdot v \\
+            &= F_0 \omega_d(- A_{elastic} \sin{\omega_d t} \cos{\omega_d t} + A_{absorptive} \cos^2{\omega_d t})
+        \end{align}
+
+        The average power due to elastic amplitude is 0, while due to absorptive amplitude it is
+        \begin{align}
+            P_{avg} &= \frac{F_0 \omega_d A_{absorptive}}{2} = \frac{F_0 \omega_d A_{absorptive}}{2}
+        \end{align}
+        
+        Resonance occurs when $\omega = \omega_d$. This marks maximum amplitude as well as power and $\delta = \frac{\pi}{2}$.
+        <br><br>
+        The spike as well as amplitude of resonance is higher for higher values of Q factor.
+        <br><br>
+        Half the power at resonance occurs at two symmetric points from the maxima.
+        The difference between the points which is known as the resonance width is $\Gamma$.
+    </section>
+</section>
+
+<section>
+    <h1>Coupled Oscillators</h1>
+    <div>
+        Coupled oscillations arise when multiple masses are interconnected via strings.
+        <br><br>
+        In this case, the force equation reduces to the following $n$ differential system of equations:
+        
+        \begin{align}
+            m_j \dv[2]{x_j}{t} &= - \sum_{k = 1}^{n} {K_{jk} x_k} \\
+            M \dv[2]{\vec{x}}{t} &= - K \vec{x} \\
+            \dv[2]{\vec{x}}{t} &= - M^{-1}K \vec{x} \\
+        \end{align}
+        
+        where $M = \vec{m} I$. Note that $K$ is a symmetric matrix by Newton's third law.
+        As before, we allow complex solutions.
+        \begin{align}
+            \dv[2]{\vec{z}}{t} &= - M^{-1}K \vec{z} \\
+        \end{align}
+    </div>
+    
+    <section class="subsection n-subsection">
+        <h1>Normal Modes</h1>
+        <div>
+            Using similar arguments for Harmonic Oscillator, assume that there exist solutions of the form $\vec{z}=\vec{A}e^{-i\omega t}$.
+            Then substituting, we get the condition:
+            \begin{align}
+                M^{-1}K\vec{A} = \omega^2 \vec{A} \label{coupled-normal-eigen}
+            \end{align}
+            This is an eigenvalue problem with eigenvalues $\omega^2$ and
+            eigenvector $\vec{A}$ (normal mode). Note that only ratios of $\vec{A}$ can be determined, the
+            scale depends on the initial conditions.
+
+            <div class="theorem remark">
+                A given eigenvalue may have multiple eigenvectors.
+            </div>
+            The general solution is then:
+            \begin{align}
+                \vec{z}(t) = \sum_{j = 1}^{n}{\lambda_j\vec{A_j}e^{-i\omega_j t}}
+            \end{align}
+            Taking the real part:
+            \begin{align}
+                \vec{x}(t) = \sum_{j = 1}^{n} b_j \cos{\omega_j t} + c_j \sin{\omega_j t}\label{solution}
+            \end{align}
+        </div>
+    </section>
+
+    <section class="subsection n-subsection">
+        <h1>Normal Coordinates</h1>
+        <div>
+            Normal modes are naturally accompanied by conjugate normal coordinates.
+            Normal coordinates are linear combinations of $\vec{x}$ that oscillate
+            with a single frequency. In other words, if $\vec{B}$ is a normal coordinate row vector 
+            associated with the eigenvector $\omega$ then
+            \begin{align}
+                \dv[2]{\vec{B}\vec{x}}{t} + \omega^2 \vec{B}\vec{x} &= 0 \\
+                \vec{B}\left(\dv[2]{\vec{x}}{t} + \omega^2 \vec{x}\right) &= 0 \\
+                \vec{B}(M^{-1}K - \omega^2 I) \vec{x} &= 0 \\
+            \end{align}
+            Since this is true for all time
+            \begin{align}
+                \vec{B}(M^{-1}K - \omega^2 I) &= 0 \\
+            \end{align}
+            Transposing and applying the fact that $M$ and $K$ are symmetric
+            \begin{align}
+                ((M^{-1}K)^T - \omega^2 I)\vec{B^T} &= 0 \\
+                (K M^{-1} - \omega^2 I)\vec{B^T} &= 0 \\
+                (K - \omega^2 M)M^{-1}\vec{B^T} &= 0 \\
+                (M^{-1}K - \omega^2 I)M^{-1}\vec{B^T} &= 0 \\
+            \end{align}
+            This is the same as \eqref{coupled-normal-eigen}
+            \begin{align}
+                M^{-1}\vec{B^T} = \vec{A} \\
+                \vec{B^T} = M \vec{A} \\
+                \vec{B} = \vec{A^T} M \\
+            \end{align}
+            Hence we have derived the normal coordinates in terms of the normal modes.
+        </div>
+    </section>
+
+    <div class="theorem remark">
+        Note that $\vec{B_\beta}\vec{A_\alpha} = 0$ for all $\alpha \neq \beta$.
+        When eigenvalues are shared by muliple eigenvectors this may not necessarily be true,
+        however, we may always redefine the eigenvectors such that they are orthogonal basis vectors
+        of the span of the eigenvectors sharing the same eigenvalue.
+        <br><br>
+        This can be used to figure out $b_j$ in \eqref{solution}.
+        \begin{align}
+            b_j = \frac{\vec{B_j} \vec{x}(0)}{\vec{B_j} \vec{A_j}}
+        \end{align}
+        Similarly,
+        \begin{align}
+            \omega_j c_j = \frac{B_j \dv{\vec{x}}{t}(0)}{\vec{B_j}\vec{A_j}}
+        \end{align}   
+    </div>
+
+    <section class="subsection">
+        <h1>$\omega^2$ is real and positive</h1>
+        <div>
+            Taking complex conjugate of \eqref{coupled-normal-eigen}:
+            \begin{align}
+                M^{-1}K \vec{A^*} = (\omega^*)^2 \vec{A^*}
+            \end{align}
+            Since this is a different eigenvalue, we can use the above remark
+            and say that
+            \begin{align}
+                (\vec{A^*})^T M \vec{A} = 0 \\
+                \sum{m_k A_k A_k^*} = 0 \\
+                \sum{m_k |A_k|^2} = 0 \\
+            \end{align}
+            since we are looking for non trivial solutions, this is a contradiction.
+            Hence $\omega^2$ is real. It is also positive since a negative value indicates
+            a negative equilibrium in the system.
+        </div>
+    </section>
+</section>
+
+<section>
+    <h1>Symmetry</h1>
+    Many problems have inherent symmetry such as translational or reflection symmetry.
+    Symmetry is represented using a symmetric matrix $S$. If $\vec{x}$ is a solution, 
+    so is $S\vec{x}$.
+    <br><br>
+    It can be shown that the following properties also hold
+    \begin{align}
+        MS = SM \\
+        KS = SK \\
+    \end{align}
+    Suppose that a system is in a normal mode $\vec{A}f(\omega t)$,
+    then $S\vec{A} f(\omega t)$ is also a solution. However both have the same $\omega$ (eigenvalue),
+    hence the normal modes must be the same:
+    \begin{align}
+        S \vec{A} \propto \vec{A}
+    \end{align}
+    Hence the normal modes of a system are the eigenvalues of the symmetry matrix!
+    
+    <div class="theorem remark">
+        This is assuming that the eigenvalues of $M^{-1}K$ are all distinct.
+        In general, all eigenvalues of $S$ are normal modes to the system but not vice versa.
+        <br><br>
+        If $S\vec{A}=\beta \vec{A}$, then:
+        \begin{align}
+            SM^{-1}K\vec{A} = M^{-1}KS\vec{A} = \beta M^{-1} K \vec{A}
+        \end{align}
+        Assuming that $S$ has distinct eigenvalues:
+        \begin{align}
+            M^{-1}K\vec{A} = \lambda \vec{A}
+        \end{align}
+        Hence $\vec{A}$ is a normal mode.
+    </div>
+
+    <section>
+        <h1>Infinite Oscillators</h1>
+        Consider an infinite system of oscillators, all with equal mass $m$ arranged with equal separation
+        and adjacent particles connected by a spring of spring constant $k$. The matrix $M^{-1}K$ can be represented as:
+        \begin{bmatrix}
+            \ddots & \vdots & \vdots & \vdots & \vdots & \dots \\
+            \dots & 2B & -C & 0 & 0 & \dots \\
+            \dots & -C & 2B & -C & 0 & \dots \\
+            \dots & 0 & -C & 2B & -C & \dots \\
+            \dots & 0 & 0 & -C & 2B & \dots \\
+            \dots & \vdots & \vdots & \vdots & \ddots \\
+        \end{bmatrix}
+        This system contains space translational symmetry. If $\vec{A}$ is a normal mode of the system,
+        then $\vec{A'}$ with its values translated by one unit is also a normal mode with same frequency.
+        \begin{align}
+            A'_j &= \beta A_j = A_{j+1} \\
+            A_j &= \beta^j \\
+        \end{align}
+        Assuming boundedness of the system, we must have $|\beta| = 1$.
+        \begin{align}
+            \beta &= e^{ika} \\
+            -\pi \lt \, &ka \lt \pi \label{krange}
+        \end{align}
+        <div class="theorem remark">
+            We have added a scale $a$ here which represents the difference between equilibrium points of consecutive masses.
+        </div>
+        Hence there are infinite eigenvectors of the system.
+        We know that for a normal mode:
+        \begin{align}
+            M^{-1}K\vec{A} &= \omega^2 \vec{A} \\
+            \omega^2 A_j &= 2B A_j - C A_{j-1} - C A_{j+1} \\
+            \omega^2 &= 2B - C (\beta + \frac{1}{\beta}) \\
+            \omega^2 &= 2B - 2C \cos{ka} \label{omega}\\
+        \end{align}
+        This is known as the Dispersion Relation.
+        <br><br>
+        Note that $k$ and $-k$ correspond to two normal modes (eigenvectors) with the same eigenvalue.
+        Hence their linear combination is also a normal mode. In particular,
+        \begin{align}
+            A_j &= \frac{1}{2i} (e^{ijk} - e^{-ijk}) = \sin{jka} \\
+        \end{align}
+        If we replace indices $j$ by distances ($x_j = ja$), we find that that all $\sin{kx}$ and $\cos{kx}$
+        are normal modes of the system for any $k$.
+    </section>
+
+    <section>
+        <h1>Boundary Conditions</h1>
+        Consider a $N$ system of masses label 1 to $N$ with masses $m$, separation $a$, spring constant $\kappa$.
+        Let the masses 0 and $N+1$ be attached to a rigid wall.
+        If $A(j)$ is a normal mode of the system:
+        \begin{align}
+            A(0) &= 0 \\
+            A(N+1) &= 0
+        \end{align}
+        In the infinite oscillators system, if we are able to find solutions such that the above conditions hold,
+        the solution wouldn't change if the remove the oscillators outside of $(0, (N+1)a)$ and add walls.
+        <br><br>
+        This is because all interactions are local, if a particle is stationary,
+        it doesn't matter whether it is stationary because of the wall or other particles.
+        <br><br>
+        The following normal modes of the infinite oscillators satisfy the boundary conditions.
+        \begin{align}
+            A_n(j) = c_n \sin{\frac{nj\pi}{N+1}}
+        \end{align}
+        where $1 \le n \le N$ because of \eqref{krange}. Using equation \eqref{omega} (assuming $B=C$ in the case of no gravity)
+        and taking $\omega_0^2 = \frac{\kappa}{m}$ and $k = \frac{n \pi}{N + 1}$:
+        \begin{align}
+            \omega_n = 2\omega_0 \sin{\frac{n\pi}{2(N+1)}}
+        \end{align}
+        For small $n$,
+        \begin{align}
+            \omega_n &\approx \sqrt{\frac{\kappa}{m}} \frac{n\pi}{N+1} \\
+            &= \sqrt{\frac{\kappa a}{ma}} \frac{n\pi}{N+1} \\
+            &= \sqrt{\frac{T}{\mu a^2}} \frac{n\pi}{N+1} \\
+            &= \sqrt{\frac{T}{\mu}} \frac{n\pi}{a(N+1)} \\
+            &= \sqrt{\frac{T}{\mu}} \frac{n\pi}{L} \\
+        \end{align}
+        Where $T$ is tension and $\mu$ is mass density.
+        Therefore we can write that for small frequencies:
+        \begin{align}
+            \omega_n &= n \omega_1 \\
+            \omega_1 &= \frac{\pi}{L} \sqrt{\frac{T}{\mu}}
+        \end{align}
+        We can use $x_j=aj$ and treat the amplitudes as a function of position and time.
+        The solution can then be compactly written as:
+        \begin{align}
+            \Psi(x, t) = \sum_{n=1}^{N} c_n \sin{\frac{n\pi x}{L}} \cos{\omega_n t} \label{n-oscillators}
+        \end{align}
+        Note that we have only taken the series upto $N$ terms, this makes sense because there are $N$
+        initial conditions (for each of the masses), thus $N$ linearly independent $\sin$ terms are sufficient.
+        <br><br>
+        Note that this function is only defined at discrete values of $x_j=aj$.
+        <div class="theorem remark">
+            As $n \to N$:
+            \begin{align}
+                \sin{\frac{pn\pi}{N+1}} &= \sin{\frac{p(N+1 - k)\pi}{N+1}} \\
+                &= (-1)^{p+1}\sin{\frac{nk\pi}{N+1}} \\
+            \end{align}
+            The system becomes acts highly unrealistic for large amplitudes at these frequencies since
+            the amplitudes of adjacent masses is opposite each other.
+            <br><br>
+            Hence, the amplitudes of higher frequencies becomes reduced.
+        </div>
+    </section>
+</section>
+
+<section>
+    <h1>The Wave Equation</h1>
+    Consider the equation of motion in the infinite oscillator case for any particle $j$
+    (assuming no gravity), let $\Psi$ be the wave function:
+    \begin{align}
+        \dv[2]{x_j}{t} = \frac{\kappa}{m} (x_{j+1} + x_{j-1} - 2 x_j)
+    \end{align}
+    In the limit of small $a$, the system can be thought to be continous and we use
+    the function $\Psi(x, t)$ to represent the displacement of a particle at a position and time ($x_j=ja$).
+    \begin{align}
+        \pdv[2]{\Psi}{t}(x) &= \frac{\kappa}{m} (\Psi(x+a) + \Psi(x-a) - 2 \Psi(x)) \\
+        &= \frac{\kappa}{m} \pdv[2]{\Psi}{x} a^2 \\
+        &= \frac{T}{\mu} \pdv[2]{\Psi}{x} \\
+    \end{align}
+    The wave equation is given by:
+    \begin{align}
+        \pdv[2]{\Psi}{t} &= c^2 \pdv[2]{\Psi}{x}
+    \end{align}
+    Where $c$ is called the phase velocity.
+    The dispersion relation is given by taking the limit as $a \to 0$ in \eqref{omega}:
+    \begin{align}
+        \omega^2 = c^2 k^2
+    \end{align}
+    Note that any single variable function $f$ can be turned into $f(x\pm ct)$ to satisfy the wave equation.
+    <div class="theorem remark">
+        Equation \eqref{n-oscillators} now becomes an infinite sum.
+        At a fixed $t$, this is simply the Fourier Series of $\Psi(x)$.
+    </div>
+
+    <section>
+        <h1>Stationary Waves</h1>
+        Consider a wave such that every point in the string is moving with the time dependence $\cos{\omega t}$
+        (perhaps due to a driving force).
+        Then by the wave equation, we can figure out the amplitude function $A$
+        \begin{align}
+            \Psi &= A(x) \cos{\omega t} \\
+            \pdv[2]{\Psi}{t} &= -\omega^2 A(x) \cos{\omega t} \\
+            \pdv[2]{\Psi}{x} &= A''(x) \cos{\omega t} \\
+            A''(x) &= - \frac{\omega^2}{v^2} A(x) \\
+            A(x) &\propto \sin{\frac{\omega}{v}x}  \\
+        \end{align}
+        Because the wave is fixed at its endpoints, $A(0) = A(L) = 0$.
+        \begin{align}
+            \frac{\omega}{v} L &= n\pi \\
+            \omega &= n\pi \frac{v}{L} \\
+        \end{align}
+        Then the frequency of the wave can be written as:
+        \begin{align}
+            f_n = \frac{\omega}{2\pi} = \frac{nv}{2L}
+        \end{align}
+        The wavelength of the wave is given by:
+        \begin{align}
+            \lambda_n = \frac{v}{f} = \frac{2L}{n}
+        \end{align}
+        These stationary waves can also be interpreted as two sinosoidal waves
+        travelling in opposite directions interfering.
+    </section>
+
+    <section>
+        <h1>Energy of Waves</h1>
+        Consider a wave $\Psi(x, t) = A \sin{(kx-\omega t)}$ travelling with velocity $v$.
+        The kinetic energy per wavelength can be derived as:
+        \begin{align}
+            E &= \int \frac{1}{2} \pdv{\Psi}{t}^2 \, dm \\
+            &= \frac{A^2 \omega^2 \mu}{2} \int_0^\lambda \cos^2{(kx-\omega t)} \, dx \\
+            &= \frac{A^2 \omega^2 \mu}{2} \frac{\lambda}{2} \\
+            &= \frac{A^2 \pi^2 T}{\lambda} \\
+        \end{align}
+        The potential energy can be derived to be the exact same
+        using $dU = \frac{1}{2} \frac{T}{dx} \left(\pdv{\Psi}{x} dx\right)^2$
+        The power required to generate a travelling wave is then:
+        \begin{align}
+            P = \frac{E+U}{t} = 2E \frac{v}{\lambda}
+        \end{align}
+
+        <div class="theorem remark">
+            The total energy in a standing wave is constant, while the kinetic and potential energies oscillate
+            between 0 and maxima like in SHM.
+        </div>
+    </section>
+</section>
+
+<section>
+    <h1>Dispersion and Wave Velocities</h1>
+    When waves travel in a medium, their speed of propagation may or may not be independent of the frequency.
+    If the speed of propagation depends on frequency, it is a dispersive medium.
+    <div class="theorem remark">
+        The significance of dispersion is that a signal consists of several component sinosoidal waves
+        each with its own frequency, because of this different parts of the wave travel at different rates
+        which leads to out of phase signals.
+    </div>
+    In the case of N coupled oscillators, $\omega_n$ increase sinosoidally with $n$, while $k_n$
+    increased linearly. This means that the speed of propagation $\frac{\omega}{k}$
+    is lower for higher values of frequency.
+</section>

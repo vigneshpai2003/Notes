@@ -1,0 +1,150 @@
+<h1 class="title">MT1113 Assignment</h1>
+<h3 class="author">Vignesh Pai (20211132)</h3>
+
+<section>
+    <h1></h1>
+    <section>
+        <h1></h1>
+        \begin{align*}
+            g(x) &= \int_0^x (x-t) f(t) \, dt \\
+            g'(x) &= \lim_{h \to 0} \frac{g(x+h) - g(x)}{h} \\
+            &= \lim_{h \to 0} \frac{\int_0^{x+h} h f(t) \, dt + \int_0^{x+h} (x-t) f(t) \, dt - \int_0^x (x-t) f(t) \, dt}{h} \\
+            &= \lim_{h \to 0} \frac{\int_0^{x+h} h f(t) \, dt + \int_x^{x+h} (x-t) f(t) \, dt}{h} \\
+            &= \int_0^x f(t) \, dt + \lim_{h \to 0} \frac{\int_x^{x+h} (x-t) f(t) \, dt}{h} \\
+        \end{align*}
+        Make substitution $u=t - x$
+        \begin{align*}
+            g'(x) &= \int_0^x f(t) \, dt - \lim_{h \to 0} \frac{\int_0^h u f(x + u) \, du}{h} \\
+        \end{align*}
+        The second term is just the average of the function $F(u) = u f(x + u)$ between $u=0$ and $u=h$ as $h \to 0$.
+        Assume $h > 0$, then the average occurs at some $0 < h' < h$ (as $h \to 0$, $h' \to 0$).
+        By continuity of $F$, $\lim_{h' \to 0} F(h') = F(0) = 0$.
+        \begin{align*}
+            g'(x) &= \int_0^x f(t) \, dt \\
+            g''(x) &= f(x)
+        \end{align*}
+        Where the second equation comes directly from the fundamental theorem of calculus.
+    </section>
+
+    <section>
+        <h1></h1>
+        \begin{align*}
+            f'(x) &= x - \frac{1}{2} x^2 \\
+            f(x) &= \int f'(x) = \frac{1}{2} x^2 - \frac{1}{6} x^3 + C \\
+            f(1) &= \frac{1}{3} + C = \frac{1}{2}\\
+        \end{align*}
+        This means that $C = \frac{1}{6}$ and
+        \begin{align*}
+            f(x) &= \frac{1}{2} x^2 - \frac{1}{6} x^3 + \frac{1}{6}
+        \end{align*}
+    </section>
+</section>
+
+<section>
+    <h1></h1>
+    \begin{align*}
+        \int_0^x f^2(t) \, dt = f^3(x) \\
+    \end{align*}
+    Differentiating both sides,
+    \begin{align*}
+        f^2(x) &= 3 f^2(x) f'(x) \\
+    \end{align*}
+    Where the LHS comes from fundamental theorem of calculus, and RHS comes from chain rule.
+    Since the function is strictly increasing on $\mathbb{R}$, it has exactly one root. Substitution of $x=0$ in 
+    the original integral gives $f(x) = 0$. Hence $x=0$ is the only root. Suppose that $x\neq 0$, then:
+    \begin{align*}
+        f'(x) &= \frac{1}{3} \\
+        f(x) &= \int f'(x) = \frac{1}{3} x + C
+    \end{align*}
+    However $C=0$ since $x=0$ is a root.
+    \begin{align*}
+        f(x) = \frac{1}{3} x \\
+        f(1) = \frac{1}{3}
+    \end{align*}
+</section>
+
+<section>
+    <h1></h1>
+    <section>
+        <h1></h1>
+        \begin{align*}
+            \int_0^2 (x^2 - |x-1|) \, dx &= \int_0^1 (x^2 + x - 1) \, dx + \int_1^2 (x^2 - x + 1) \, dx \\
+            &= \left(\frac{x^3}{3} + \frac{x^2}{2} - x \right) \Big|_0^1 + \left(\frac{x^3}{3} - \frac{x^2}{2} + x\right) \Big|_1^2 \\
+            &= \frac{1}{3} + \frac{1}{2} - 1 + \frac{7}{3} - \frac{3}{2} + 1 \\
+            &= \frac{5}{3}
+        \end{align*}
+    </section>
+
+    <section>
+        <h1></h1>
+        \begin{align*}
+            \int_{-2}^2 f(x) \, dx &= \int_0^2 (4-x^2) \, dx + \int_{-2}^0 2 \, dx \\
+            &= \left(4x - \frac{x^3}{3}\right) \Big|_0^2 + 2x \Big|_{-2}^0 \\
+            &= 8 - \frac{8}{3} + 4 \\
+            &= \frac{28}{3}
+        \end{align*} 
+    </section>
+</section>
+
+<section>
+    <h1></h1>
+    Consider area of region $y = \ln{x}$ between $y=0$ and $x=e$.
+    <section>
+        <h1></h1>
+        The area is the area bounded above x axis between $x=1$ and $x=e$.
+        \begin{align*}
+            \int_1^e \ln{x} \, dx = x (\ln{x} - 1) \Big|_1^e = 1
+        \end{align*}
+    </section>
+    <section>
+        <h1></h1>
+        The volume found by revolving above x axis is
+        \begin{align*}
+            \int_1^e \pi \ln^2{x} \, dx 
+        \end{align*} 
+        For finding the indefinite integral, we use integration by parts on $1$ and $\ln^2{x}$:
+        \begin{align*}
+            \int 1 \times \ln^2{x} \, dx &= x \ln^2{x} - 2 \int x \times \ln{x} \frac{1}{x} \, dx \\
+            &= x \ln^2{x} - 2 \int \ln{x} dx \\
+            &= x \ln^2{x} - 2 x (\ln{x} - 1) \\
+            &= x (1 + (\ln{x} - 1)^2)
+        \end{align*}
+        The volume simplifies to:
+        \begin{align*}
+            x (1 + (\ln{x} - 1)^2) \Big|_1^e = e - 2
+        \end{align*}
+    </section>
+
+    <section>
+        <h1></h1>
+        The volume found by rotating about $x=-2$ is:
+        \begin{align*}
+            \int_1^e 2 \pi (2 + x) \ln{x} \, dx &= 4 \pi \int_1^e \ln{x} \, dx + 2 \pi \int_1^e x \ln{x} \, dx \\
+            &= 4\pi + \left(\frac{x^2}{2}\ln{x} - \frac{x^2}{4}\right) \Big|_1^e \\
+            &= 4\pi + \frac{e^2 + 1}{4}
+        \end{align*} 
+    </section>
+</section>
+
+<section>
+    <h1></h1>
+    Maxima implies that $f'(1) = 0$
+    Using integration by parts:
+    \begin{align*}
+        \int x f''(x) &= x f'(x) - f(x) + C \\
+        \int_0^1 x f''(x) &= 1f'(1) - 0f'(0) - f(1) + f(0) \\
+        &= -1
+    \end{align*}
+</section>
+
+<section>
+    <h1></h1>
+    \begin{align*}
+        f(f^{-1}(x)) &= x \\
+        f'(f^{-1}(x)) (f^{-1})'(x) &= 1 \\
+        (f^{-1})'(0) &= \frac{1}{f'(f^{-1}(0))} \\
+        &= \frac{1}{f'(0)} \\
+        &= \frac{1}{1 + \sin{\sin{0}}} \\
+        &= 1 \\
+    \end{align*}
+</section>
