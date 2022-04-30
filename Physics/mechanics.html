@@ -3,22 +3,115 @@
 <div class="table-of-contents"></div>
 
 <section>
-    <h1>Lagrangian Mechanics</h1>
-    Let $M$ be the configuration space of a system, and let $L$ be its Lagrangian
-    then the action $S$ is defined in a time interval as:
-    \begin{align}
-        S(x) := \int_{t_1}^{t_2} L(x, \dot{x}, t) \, dt
-    \end{align}
-    where $x: [t_1, t_2] \to M$ represents the time evolution of the configuration of the system.
+    <h1>Definitions</h1>
+    A system consists of particles, the space of configurations of the system
+    is the <i>state space</i>. When configurations are described using positions and momenta
+    of the particles, it is also known as a <i>phase space</i>.
     <br><br>
-    $M$ is often restrained by holonomic constraints, these are constraints of the form $f(x, t) = 0$.
+    The dynamics of the system must be <i>deterministic</i> and <i>reversible</i>.
+    Where reversible just means deterministic into the past.
+    If the state space is discrete, the the dynamics can be described using a directed graph
+    with the configurations as vertices. Each configuration has exactly one edge
+    stemming to and from it. This fundamental constraint is known as the <i>conservation of information</i>.
+    <br><br>
+    In the discrete case, there may exist dynamical laws that lead to multiple cycles in the graph.
+    We can assign a meaningful value $Q$ to each configuration in the space
+    such that every vertex in a cycle has the same value, since the system will always
+    be on a vertex of the same cycle, there is a <i>conservation law</i> on $Q$.
     <section>
-        <h1>Principle of Stationary Action</h1>
-        If the particle's is perturbed by a small amount $\epsilon \beta(t)$:
+        <h1>Force and Energy</h1>
+        Force is an entity that changes state of motion of an object. Mass is a measure of the inertia of the object.
+        Forces are generally observed to be only position dependent.
+        This gives an intuition that perhaps the universe is using force
+        as an entity to minimize some <i>potential energy</i> function.
+        In one dimension
         \begin{align}
-            \delta S &:= \dv{S(x_0 + \epsilon \beta)}{\epsilon} \Big|_{\epsilon=0} \\
-            &= \int_{t_1}^{t_2} \pdv{L}{x} \beta + \pdv{L}{\dot{x}} \dot{\beta} \, dt \\
-            &= \int_{t_1}^{t_2} \left(\pdv{L}{x} - \dv{}{t}\pdv{L}{\dot{x}}\right) \beta \, dt \\
+            F = - \dv{V(x)}{x}
         \end{align}
+        Note that this is more of a definition of $V$ rather than a constraint on $F$.
+        The <i>kinetic energy</i> function is chosen as a function of the phase for conveniently
+        defining a conserved quantity.
+        <br><br>
+        If Newton's laws are true, the function $T = \frac{1}{2} mv^2$ satisfies that that $T+V$
+        is a conserved quantity.
+        <div class="theorem remark">
+            Our universe is such that the fundamental forces are conservative, so we can
+            extend this to three dimensions:
+            \begin{align}
+                F = - \nabla V
+            \end{align}
+        </div>
+    </section>
+    <section>
+        <h1>The Lagrangian Method</h1>
+        Newtonian physics deals with an initial value problem, the initial conditions
+        are specified and the trajectory of the system is obtained.
+        Lagrangian physics on the other hand is a boundary value problem, consider a particle that moves
+        between two points under a potential. There are many paths it may take, but which does it actually take?
+        The <i>principle of stationary action</i> claims that the particle will move such that the action along the path is stationary.
+        <div class="theorem remark">
+            This is analogous to the group velocity of a wave. The group velocity occurs
+            when the wave velocity of a frequency is constant for small variations in frequency.
+            If it wasn't constant, the various sinosoidal variations would cancel out on average over time.
+            The group velocity is a sort of resonance of several waves.
+            <br><br>
+            The Lagrangian theory can be interpreted in quantum mechanics as the particle taking each and
+            every path between the points. Most of the paths interfere destructively,
+            except the paths around which the action is stationary.
+        </div>
+        For every system we can find a Lagrangian function $L$ and define the action on a path as:
+        \begin{align}
+            S(x) := \int_{t_1}^{t_2} L(x, \dot{x}, t) \, dt
+        \end{align}
+        <section>
+            <h1>Euler Lagrange Equations</h1>
+            If the particle's path is perturbed by a small amount $\epsilon \beta(t)$
+            with arbritrary $\beta$ such that the endpoints are still the same.
+            \begin{align}
+                \delta S &:= \dv{S(x_0 + \epsilon \beta)}{\epsilon} \Big|_{\epsilon=0} \\
+                &= \int_{t_1}^{t_2} \pdv{L}{x} \beta + \pdv{L}{\dot{x}} \dot{\beta} \, dt \\
+                &= \int_{t_1}^{t_2} \left(\pdv{L}{x} - \dv{}{t}\pdv{L}{\dot{x}}\right) \beta \, dt \\
+            \end{align}
+            Since this must hold for any $\beta$,
+            \begin{align}
+                \pdv{L}{x} = \dv{}{t}\pdv{L}{\dot{x}}
+            \end{align}
+            For classical mechanics, $L = T - V$ agrees with Newton's laws.
+            This form of $L$ doesn't have any deeper meaning as to why it is the way it is.
+            Remember that $T$ was 'derived' in Newtonian mechanics for convenience,
+            the fact that it shows up here is a coincidence.
+        </section>
+        <section>
+            <h1>Generalized Coordinates and Momenta</h1>
+            $p_i = \pdv{L}{\dot{q_i}}$ is called the generalized momentum conjugate to $q_i$,
+            in cartesian coordinates it is the same as momentum.
+            In polar coordinates, the conjugate momentum of $r$ is $m\dot{r}$
+            and that of $\theta$ is $mr\dot{\theta}^2$ (angular momentum).
+            <br><br>
+            Coordinates are <i>cyclic</i> when they do not explicitly appear in $L$,
+            but their velocities do. In this case, their conjugate momentum is conserved.
+        </section>
+    </section>
+    <section>
+        <h1>Spatial Symmetries</h1>
+        Consider a change of coordinates $q_i'=q_i'(\{q_i\})$.
+        If the system under this new set of coordinates does not change the Lagrangian,
+        the Lagrangian is said to be <i>symmetric</i> with respect to the transformation.
+        Consider an infinitesimal transformation
+        \begin{align}
+            q_i' = q_i + \epsilon f_i(\{q_i\})
+        \end{align}
+        The change in the Lagrangian is
+        \begin{align}
+            \delta L &= \sum \left(\pdv{L}{q_i} \epsilon f_i(\{q_i\}) + \pdv{L}{\dot{q_i}} \epsilon \dot{f_i}(\{q_i\}))\right) \\
+            &= \sum \left(\dv{}{t}\pdv{L}{\dot{q_i}} f_i(\{q_i\}) + \pdv{L}{\dot{q_i}} \dot{f_i}(\{q_i\}))\right) \epsilon \\
+            &= \sum \dv{}{t}\left(\pdv{L}{\dot{q_i}} f_i(\{q_i\})\right) \epsilon \\
+            &= \dv{}{t}\left( \sum \pdv{L}{\dot{q_i}} f_i(\{q_i\})\right) \epsilon = 0 \\
+        \end{align}
+        The symmetry leads to the conserved quantity $\sum \pdv{L}{\dot{q_i}} f_i(\{q_i\})$.
+    </section>
+    <section>
+        <h1>Temporal Symmetries</h1>
+        A system is time translation invariant if the $\pdv{L}{t} = 0$
     </section>
 </section>
