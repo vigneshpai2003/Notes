@@ -1,0 +1,330 @@
+<h1 class="title">Polarization of the Hydrogen Atom</h1>
+<h3 class="author">Vignesh Pai (20211132)</h3>
+<div class="table-of-contents"></div>
+
+<section class="x">
+    <h1>The Problem</h1>
+
+    <div>
+        <div style="text-align: center; font-style: italic;">
+            All models are wrong, but some are useful.
+        </div>
+        <div style="text-align: end; margin-right: 5%; font-weight: bolder;">
+            George E. P. Box
+        </div>
+    </div>
+
+    <div>
+        When a neutral atom like Hydrogen is exposed to an electric field,
+        the atom becomes polarized and develops a dipole moment in the direction of electric field.
+        Experimentally, it has been observed that in the presence of an constant electric field $E$,
+        the dipole moment $p$ follows the equation:
+        \begin{align*}
+        p = \alpha E
+        \end{align*}
+        Where $\alpha$ is known as the atomic polarizability and can be experimentally determined.
+        <br><br>
+        But what is the theoretical basis for this? Like all phenomena at this scale, this is a quantum mechanical
+        problem.
+        However, can we attempt to analyze this problem from a classical and electrostatic perspective?
+        <br><br>
+        The problem will be analyzed using model building of the atom
+        and the physical concept that any system
+        eventually attains the configuration of minimum of potential energy.
+    </div>
+</section>
+
+<section>
+    <h1>Electrostatic Model of the Atom</h1>
+
+    <div>
+        To solve the problem, we first need an electrostatic model for the atom,
+        atleast for single electron systems like Hydrogen atom in ground state.
+        <br><br>
+        The Hydrogen atom is approximated with a point charge (proton) surrounded by a uniform
+        thin shell of total charge the same as the electron and radius $r$ (electron cloud). If we consider only
+        electrostatic interactions, the atom is unstable. This can be seen if we write
+        the potential energy of the configuration
+        \begin{align}
+        U &= U_{sphere} - \frac{ke^2}{r} \\
+        &= \frac{1}{2} \frac{ke^2}{r} - \frac{ke^2}{r} \\
+        &= - \frac{1}{2} \frac{ke^2}{r}
+        \end{align}
+        The self energy of a sphere is derived in the appendix. This potential energy
+        is strictly decreasing with decrease in $r$, therefore the electron cloud
+        will collapse.
+        <br><br>
+        To prevent this collapse, we introduce a 'magic' potential $U_{magic}$, a potential that
+        has no physical basis and is just there to prevent the collapse of our atom.
+        At this point, we can also take motivation from Bohr's model of the atom
+        and construct the magic potential such that, in equilibrium, the electron cloud
+        is at a distance same as the Bohr radius.
+        <div class="theorem remark x">
+            The magic potential is non-unique, however, it must be logically chosen
+            to satisfy some qualitative theory or experimental data like Bohr's radii.
+        </div>
+        The potential energy can be written as:
+        \begin{align}
+        U &= U_{magic} - \frac{1}{2} \frac{ke^2}{r}
+        \end{align}
+        The system will attain the configuration of minimum potential energy, in other words $\dv{U}{r} = 0$.
+        \begin{align}
+        \dv{U}{r}\Big|_{r=r_0} &= \dv{U_{magic}}{r} + \frac{1}{2} \frac{ke^2}{r^2} = 0
+        \end{align}
+        Where $r_0 = \frac{\hbar^2}{kme^2}$ is the Bohr radius.
+        For the purposes of this problem, we do not need to explicitly find a suitable magic potential,
+        but a couple of sample potentials are given in the appendix.
+    </div>
+</section>
+
+<section>
+    <h1>Energies of Atom in Uniform Electric Field</h1>
+    <div>
+        When the Hydrogen atom is placed in a uniform electric field $-E \hat{z}$, the electron cloud
+        changes in both shape and charge distribution, while the nucleus shifts in position along $z$ axis.
+        We make the approximation that the electron cloud remains spherical with same radius.
+        We also make the assumption that the charge density varies as $\sigma(\theta) = \sigma_0 + \delta \cos{\theta}$
+        where $\sigma_0 = \frac{-e}{4\pi r^2}$.
+        <br><br>
+        The nucleus is initially taken at $\vec{r} = \vec{0}$, the potential due to the electric field can be written as
+        $V = Ez = E r \cos{\theta}$.
+    </div>
+
+    <section>
+        <h1>Energy due to Potential of External Field</h1>
+
+        <div>
+            The energy of the nucleus is given by $eV = eEz$, while the energy of the cloud is:
+            \begin{align}
+            U_{E, cloud} &= \int V dq = \int V \sigma \, dA \\
+            &= \int_0^\pi V \sigma 2 \pi r^2 \sin{\theta} \, d\theta \\
+            &= \int_0^\pi E r \cos{\theta} (\sigma_0 + \delta \cos{\theta}) 2 \pi r^2 \sin{\theta} \, d\theta \\
+            &= 2\pi E r^3 \int_0^\pi \cos{\theta} (\sigma_0 + \delta \cos{theta}) \sin{\theta} \, d\theta \\
+            &= 2\pi E r^3 \int_0^\pi \delta \cos^2{\theta} \sin{\theta} \, d\theta \\
+            &= \frac{4\pi E r^3}{3} \delta
+            \end{align}
+            The total energy due to the field is then:
+            \begin{align}
+            U_E = eEz + \frac{4\pi E r^3}{3} \delta
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Energy of Interaction of Nucleus and Electron Cloud</h1>
+
+        The energy is given by:
+        \begin{align}
+        U_{p, e} &= \int \frac{ke \, dq}{|\vec{r} - z \hat{z}|} \\
+        &= \int_0^\pi \frac{ke \sigma 2 \pi r^2 \sin{\theta} \, d\theta}{\sqrt{|\vec{r} - z \hat{z}|^2}} \\
+        &= 2\pi ke r^2 \int_0^\pi \frac{(\sigma_0 + \delta \cos{\theta}) \sin{\theta} \, d\theta}{\sqrt{r^2 + z^2 - 2rz
+        \cos{\theta}}} \\
+        &= 2\pi ke r^2 \frac{\sqrt{r^2+z^2 - 2rz \cos{\theta}} (\delta (r^2 + z^2 + rz \cos{\theta}) + 3rz
+        \sigma_0)}{3r^2z^2}\Big|_0^\pi \\
+        &= - \frac{ke^2}{r} + \frac{2\pi ke \delta}{3z^2} \sqrt{r^2+z^2 - 2rz \cos{\theta}} (r^2 + z^2 + rz
+        \cos{\theta})\Big|_0^\pi \\
+        &= - \frac{ke^2}{r} + \frac{2\pi ke \delta}{3z^2} 2z^3 \\
+        &= - \frac{ke^2}{r} + \frac{4\pi ke}{3} \delta z\\
+        \end{align}
+    </section>
+
+    <section>
+        <h1>Self Energy of Electron Cloud</h1>
+
+        The self energy formula for non uniform spherical surface is derived in the Appendix.
+        However, it requires calculating the potential due to the cloud close to it.
+        This is potentially problematic as the potential calculation involves complicated integrals.
+        Therefore, we first approximate the potential function.
+        <br><br>
+        Because of the symmetry of the distribution, the potential at $\theta = \frac{\pi}{2}$ is $-\frac{ke}{r}$.
+        If we calculate the potential at $\theta=0, \pi$, we might be able to interpolate and get the potential function
+        $V(\theta)$.
+        <br><br>
+        The potential at $\theta=0$ is given by:
+        \begin{align}
+        V(\theta = 0) &= \int \frac{k \, dq}{|\vec{r} - r \hat{z}|} \\
+        &= \int_0^\pi \frac{k \sigma 2 \pi r^2 \sin{\theta} \, d\theta}{\sqrt{2r^2(1-\cos{\theta})}} \\
+        &= \int_0^\pi \frac{k (\sigma_0 + \delta \cos{\theta}) 2 \pi r^2 \sin{\theta} \,
+        d\theta}{\sqrt{4r^2\sin^2{\frac{\theta}{2}}}} \\
+        &= k \pi r \int_0^\pi \frac{(\sigma_0 + \delta \cos{\theta}) \sin{\theta} \, d\theta}{\sin{\frac{\theta}{2}}} \\
+        &= 2k \pi r \int_0^\pi (\sigma_0 + \delta \cos{\theta}) \cos{\frac{\theta}{2}} \, d\theta \\
+        &= -\frac{ke}{r} + 2k \pi r \delta \int_0^\pi \cos{\theta} \cos{\frac{\theta}{2}} \, d\theta \\
+        &= -\frac{ke}{r} + \frac{4k \pi r}{3} \delta \\
+        \end{align}
+        By the symmetry of the distribution, it is easy to see that $V(\theta=\pi) = -\frac{ke}{r} - \frac{4k \pi r}{3}
+        \delta$.
+        A good interpolating function is
+        \begin{align}
+        V(\theta) = -\frac{ke}{r} + \frac{4k \pi r}{3} \delta \cos{\theta}
+        \end{align}
+
+        <div>
+            Now, the self energy of the cloud is given by
+            \begin{align}
+            U_{cloud} &= \frac{r^2}{2} \int_0^\pi \int_0^{2\pi} V \sigma \sin{\theta} \, d\phi \, d\theta \\
+            &= \pi r^2 \int_0^\pi V \sigma \sin{\theta} \, d\theta \\
+            &= \pi r^2 \int_0^\pi \left(-\frac{ke}{r} + \frac{4k \pi r}{3} \delta \cos{\theta}\right) (\sigma_0 + \delta \cos{\theta}) \sin{\theta} \, d\theta \\
+            &= \frac{1}{2} \frac{ke^2}{r} + \pi r^2 \int_0^\pi \frac{4k \pi r}{3} \delta^2 \cos^2{\theta} \sin{\theta} \, d\theta \\
+            &= \frac{1}{2} \frac{ke^2}{r} + \frac{8k \pi^2 r^3}{9} \delta^2  \\
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Energy due to Magic Potential</h1>
+        <div>
+            In general, the magic potential will vary with charge distribution and
+            position of the nucleus. However, for cases like the 'pressure' model of the magic potential
+            lead to energies independent of charge distribution and position of nucleus.
+            We consider that the magic potential is independent of $z$ and $\delta$.
+        </div>
+    </section>
+</section>
+
+<section>
+    <h1>Polarization of Atom in Electric Field</h1>
+
+    The total energy of the system is given by
+    \begin{align}
+        U &= U_E + U_{p, e} + U_{cloud} + U_{magic} \\
+        U(z, \delta) &= eEz + \frac{4\pi E r^3}{3} \delta + \frac{8k \pi^2 r^3}{9} \delta^2  + \frac{4\pi ke}{3} \delta z + \dots
+    \end{align}
+    Where terms independent of $z, \delta$ have been omitted. The system will have $z, \delta$ such that
+    \begin{align}
+        \pdv{U}{z} &= eE + \frac{4\pi ke}{3} \delta = 0 \\
+        \pdv{U}{\delta} &= \frac{4\pi E r^3}{3} + \frac{16k \pi^2 r^3}{9} \delta + \frac{4\pi ke}{3} z = 0 \\
+    \end{align}
+    Solving the system of equations gives $\delta = -\frac{3E}{4\pi k} = -3\epsilon_0 E \\$ and $z = 0$.
+    We can now calculate the dipole moment of the cloud
+    \begin{align}
+        p &= \int_0^\pi z \sigma 2 \pi r^2 \sin{\theta} \, d\theta \\
+        &= \int_0^\pi (\sigma_0 + \delta \cos{\theta}) 2 \pi r^3 \cos{\theta} \sin{\theta} \, d\theta \\
+        &= 2 \pi r^3 \int_0^\pi \delta \cos^2{\theta} \sin{\theta} \, d\theta \\
+        &= \frac{4 \pi r^3}{3} \delta \\
+        &= - 4 \pi \epsilon_0 r^3 E \\
+    \end{align}
+    This points along the electric field as expected and is proportional to the magnitude of the field.
+    <br><br>
+    The atomic polarizability is given by $4\pi \epsilon_0 r^3$.
+</section>
+
+<section>
+    <h1>Comparision with Experimental Data</h1>
+    The experimental value of $\frac{\alpha}{4\pi \epsilon_0}$ is $0.667 \cdot 10^{-30} m^3$,
+    while the theoretical model gives $0.148 \cdot 10^{-30} m^3$. This is good agreement
+    considering the approximations made.
+    <div class="theorem remark x">
+        Quantum mechanics predicts the phenomena of tunnel ionization, where strong electric fields
+        can cause the atom to be ionized. For Hydrogen atom, this is of the order $10^{11} V/m$.
+        <br><br>
+        With the current calculations, given sufficient electric field, the electron cloud will contain
+        regions of positive charge density for $\delta > \sigma_0$. This is not physical
+        and corresponds to the ionization electric field. A simple calculation gives that $E > \frac{ke}{3r^2}$
+        would yield this situation.
+        <br><br>
+        The numerical value of minimum $E$ is $1.715 \cdot 10^{11} V/m$, the same order as experimental data.
+    </div>
+</section>
+
+<section class="x">
+    <h1>Appendix</h1>
+
+    <section>
+        <h1>Self Energy of Sphere</h1>
+
+        <div>
+            The problem is to find the potential energy of a spherical shell of radius $r$
+            and charge $Q$ distributed uniformly.
+            To construct this system, take an uncharged sphere and slowly add small charges to it,
+            bringing the charges from infinity.
+            If at any point the system has charge $q$ and a charge $dq$ is brought from infinity,
+            the increase in potential energy is:
+            \begin{align}
+            dU &= \frac{kq}{r} dq \\
+            U &= \int_0^Q \dv{U}{q} dq \\
+            &= \frac{1}{2} \frac{kQ^2}{r}
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Self Energy of non-uniform Sphere</h1>
+
+        <div>
+            Consider a charge sphere with surface charge distribution $\sigma(r, \theta, \phi)$.
+            We construct such a sphere by bringing shells of charge $d\lambda \sigma$ from infinity to the radius of the
+            sphere.
+            <br><br>
+            Let the potential due to the distribution be $V(r, \theta, \phi)$.
+            When the sphere has distribution $\lambda \sigma$, $0 \lt \lambda \lt 1$, the potential
+            due to it will be $\lambda V$. The increase in potential energy by bringing a charge $d\lambda \sigma dA$
+            at $(r, \theta, \phi)$ is given by
+            \begin{align}
+            dU = \lambda V \sigma r^2 \sin{\theta} \,d\theta \,d\phi \,d\lambda
+            \end{align}
+            Integrating $\lambda$ from $0$ to $1$ and the rest as usual, we get:
+            \begin{align}
+            U = \frac{r^2}{2} \int_0^\pi \int_0^{2\pi} V \sigma \sin{\theta} \, d\phi \, d\theta
+            \end{align}
+        </div>
+    </section>
+
+    <section>
+        <h1>Magic Potential (Pressure)</h1>
+        Here we construct a magic potential whose source is physical and
+        is attributed to 'pressure' due to charge density which prevents further collapse of the electron cloud.
+        <br><br>
+        Consider a simple magic potential which follows a power law $\frac{\lambda}{r^{\alpha}}$,
+        then the total energy is:
+        \begin{align}
+        U = \frac{\lambda}{r^\alpha} - \frac{1}{2} \frac{ke^2}{r}
+        \end{align}
+        Differentiating, equating to $0$ and using Bohr's radius $r = \frac{\hbar^2}{mke^2}$, we get the value of
+        $\lambda$ as:
+        \begin{align}
+        \lambda = \frac{1}{2\alpha} \frac{k^{2-\alpha}}{m^{\alpha -1 }} e^{2(2-\alpha)} \hbar^{2(\alpha - 1)}
+        \end{align}
+        It is intuitive enough that this magic potential must be increasing with charge of cloud, hence the power
+        of $e$ must be positive and $\alpha \lt 2$. Note that $\alpha = \frac{3}{2}$ gives particularly
+        'nice' results:
+        \begin{align}
+        \lambda = \frac{\hbar}{3} \sqrt{\frac{k}{m}} e
+        \end{align}
+        This is even 'nicer' because it depends only on the total charge of the cloud, not the distribution of the
+        charge.
+        We can write the energy in differential form like:
+        \begin{align}
+        dU_{magic} = \frac{\hbar}{3} \sqrt{\frac{k}{m}} \frac{\sigma \,dA}{r^{\frac{3}{2}}}
+        \end{align}
+        Integrating $\sigma \,dA$ just gives $e$ and we need not worry about the distribution,
+        this will be especially useful when considering a polarized atom.
+        <div class="theorem remark x">
+            Note that this magic potential will not yield the radii from Bohr's model
+            for a nucleus with charge $Ze$.
+        </div>
+    </section>
+
+    <section>
+        <h1>Magic Potential (Bohr's Model)</h1>
+        Here we construct a magic potential that leads to radii that
+        conform to Bohr's atomic model.
+        <br><br>
+        Following notation from Bohr's model, suppose the nucleus has charge $Ze$,
+        and let $U_{magic}$ be the potential energy due to one unit charge on nucleus.
+        The energy of the system is then:
+        \begin{align}
+        U = Z U_{magic} - \left(Z - \frac{1}{2}\right) \frac{ke^2}{r}
+        \end{align}
+        Differentiating and using the fact that radius of atom is $\frac{r_0}{Z}$,
+        \begin{align}
+        \dv{U_{magic}}{r}\Big|_{r=\frac{r_0}{Z}} &= - \left(Z - \frac{1}{2}\right)
+        \frac{ke^2}{Z\left(\frac{r_0}{Z}\right)^2} \\
+        &= - \left(\frac{1}{\left(\frac{r_0}{Z}\right)^2} - \frac{1}{2r_0 \frac{r_0}{Z}}\right) ke^2 \\
+        &= - \left(\frac{1}{r^2} - \frac{1}{2r_0 r}\right) ke^2
+        \end{align}
+        For simplicity, assume that this is valid for all $r$, we can then get $U_{magic}$ by integrating:
+        \begin{align}
+        U_{magic} = \left(\frac{\ln{r}}{2r_0} + \frac{1}{r} \right) ke^2
+        \end{align}
+    </section>
+</section>

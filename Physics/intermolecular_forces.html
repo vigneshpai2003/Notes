@@ -1,0 +1,41 @@
+<h1 class="title">Intermolecular Forces</h1>
+<h3 class="author">Vignesh M Pai (20211132)</h3>
+<div class="table-of-contents"></div>
+
+<section>
+    <h1>Dipoles</h1>
+    <div>
+        Dipoles are point (almost) objects with no net charge
+        but have an electric field and potential. A dipole is two charges
+        of equal magnitude but opposite direction separated by a distance.
+        We make observations from a large distance so that the dipole appears almost point like.
+        <br><br>
+
+        Consider two charges $q$ and $-q$ placed at $(a, 0)$ and $(-a, 0)$. The electric potential
+        at $(x, y)$ is given by:
+        \begin{align}
+            V &= kq \left(\frac{1}{\sqrt{(x-a)^2 + y^2}} - \frac{1}{\sqrt{(x+a)^2 + y^2}}\right) \\
+            &\approx kq \frac{2ax}{(x^2+y^2)^{\frac{3}{2}}}
+        \end{align}
+        We can define the dipole moment $\vec{p}:= 2qa \hat{x}$, then
+        \begin{align}
+            V = \frac{k \vec{p} \cdot \vec{r}}{r^3}
+        \end{align}
+    </div>
+</section>
+
+<section>
+    <h1>Interaction between two dipoles</h1>
+    <div>
+        Consider two dipoles with dipole moments $\vec{p_1} = 2a_1q_1 \hat{x}$
+        and $\vec{p_2} = 2a_2q_2 (\cos{\theta} \hat{x} + \sin{\theta} \hat{y})$.
+        Assume they are separated by a large distance $r \hat{x}$.
+        The potential energy of the configuration is given by:
+        \begin{align}
+            U &= -q_2 V_1(\sqrt{(r - a_2 \cos{\theta})^2 + (a_2 \sin{\theta})^2}) + q_2 V_1(\sqrt{(r + a_2 \cos{\theta})^2 + (a_2 \sin{\theta})^2}) \\
+            &\approx \dv{V_1}{r} 4q_2a_2 \cos{\theta} \\
+            &= \frac{-2kp_1}{r^3} 2 p_2 \cos{\theta} \\
+            &= -4k \frac{\vec{p_1} \cdot \vec{p_2}}{r^3}
+        \end{align}
+    </div>
+</section>
